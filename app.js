@@ -3,15 +3,27 @@ const posts = [
   {title: 'Post Two', body: 'This is post two'},
 ];
 
-/*function createPost(post) {
-  setTimeout(function() {
-    posts.push(post);
-  }, 2000);
+function createPost(post) {
+  return new Promise(function(resolve, reject){
+    setTimeout(function() {
+      posts.push(post);
+
+
+      const error = true;
+
+      if(!error) {
+        resolve();
+      } else {
+        reject('Error: Something went wrong');
+      }
+      
+    }, 2000);
+  });
 }
 
 
 function getPosts() {
- setTimeout(function (){
+ setTimeout(function() {
   let output = '';
   posts.forEach(function(post){
     output += `<li>${post.title}</li>`;
@@ -20,11 +32,13 @@ function getPosts() {
  }, 1000);
 }
 
-createPost({title: 'Post Three', body: 'This is post three'});
+createPost({title: 'Post Three', body: 'This is post three'}).then(getPosts)
+.then(getPosts)
+.catch(function(err) {
+  console.log(err);
+});
 
-getPosts();*/
-
-function createPost(post, callback) {
+/*function createPost(post, callback) {
   setTimeout(function() {
     posts.push(post);
     callback();
@@ -42,4 +56,5 @@ function getPosts() {
  }, 1000);
 }
 
-createPost({title: 'Post Three', body: 'This is post three'}, getPosts);
+createPost({title: 'Post Three', body: 'This is post three'}).then(getPosts);*/
+
