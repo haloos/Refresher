@@ -1,60 +1,31 @@
-const posts = [
-  {title: 'Post One', body: 'This is post one'},
-  {title: 'Post Two', body: 'This is post two'},
-];
+const user = {email: 'jdo@egmail.com'};
 
-function createPost(post) {
-  return new Promise(function(resolve, reject){
-    setTimeout(function() {
-      posts.push(post);
+try {
+  // Produce a Reference Error
+  //myFunction();
 
+  // Produce a TypeError
+  //null.myFunction();
 
-      const error = true;
+  // Will produce SyntaxError
+  //console.log(eval('2+2')); // Evaulate JS
 
-      if(!error) {
-        resolve();
-      } else {
-        reject('Error: Something went wrong');
-      }
-      
-    }, 2000);
-  });
+  // Will produce a URIError
+  //decodeURIComponent('%');
+
+if(!user.name) {
+  //throw 'User has no name';
+  throw new SyntaxError('User lost');
 }
 
-
-function getPosts() {
- setTimeout(function() {
-  let output = '';
-  posts.forEach(function(post){
-    output += `<li>${post.title}</li>`;
-  });
-  document.body.innerHTML = output;
- }, 1000);
+} catch(e) {
+  console.log(`User Error: ${e.message}`);
+  //console.log(e.message); // Out put to browser DOM
+  //console.log(e.name); // Name of error "Type"
+  //console.log(e instanceof ReferenceError); //"True"
+  //console.log(e instanceof TypeError); // "False"
+} finally {
+  console.log('Finally runs reguardless of results...');
 }
 
-createPost({title: 'Post Three', body: 'This is post three'}).then(getPosts)
-.then(getPosts)
-.catch(function(err) {
-  console.log(err);
-});
-
-/*function createPost(post, callback) {
-  setTimeout(function() {
-    posts.push(post);
-    callback();
-  }, 2000);
-}
-
-
-function getPosts() {
- setTimeout(function (){
-  let output = '';
-  posts.forEach(function(post){
-    output += `<li>${post.title}</li>`;
-  });
-  document.body.innerHTML = output;
- }, 1000);
-}
-
-createPost({title: 'Post Three', body: 'This is post three'}).then(getPosts);*/
-
+console.log('Program continues...');
