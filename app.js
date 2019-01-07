@@ -1,31 +1,36 @@
-const user = {email: 'jdo@egmail.com'};
+let re;
+re = /hello/;
+re = /hello/i; // i = case insensitive 
+// re = /hello/g; // Global search
 
-try {
-  // Produce a Reference Error
-  //myFunction();
+//console.log(re);
+//console.log(re.source);
 
-  // Produce a TypeError
-  //null.myFunction();
+// exec() - Return result in an array or null
+//const result = re.exec('hello world');
+//console.log(result);
+//console.log(result[0]);
+//console.log(result.index);
+//console.log(result.input);
 
-  // Will produce SyntaxError
-  //console.log(eval('2+2')); // Evaulate JS
+// test() - Returns true or false
+// const result = re.test('Hello');
+// console.log(result);
 
-  // Will produce a URIError
-  //decodeURIComponent('%');
+// match() - Return result array or null
+// const str = 'Hello There'
+// const result = str.match(re);
+// console.log(result);
 
-if(!user.name) {
-  //throw 'User has no name';
-  throw new SyntaxError('User lost');
-}
+// search() - Returns index of the first match if not found returns -1
+// const str = 'Hello There';
+// const result = str.search(re);
+// console.log(result);
 
-} catch(e) {
-  console.log(`User Error: ${e.message}`);
-  //console.log(e.message); // Out put to browser DOM
-  //console.log(e.name); // Name of error "Type"
-  //console.log(e instanceof ReferenceError); //"True"
-  //console.log(e instanceof TypeError); // "False"
-} finally {
-  console.log('Finally runs reguardless of results...');
-}
+// replace() - Return new string with some or all matches of a pattern 
+const str = 'Hello There';
+const newStr = str.replace(re, 'Hi');
+console.log(newStr);
 
-console.log('Program continues...');
+
+
