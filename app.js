@@ -1,60 +1,31 @@
-re = /hello/i;
+// Create a symbol
+// const sym1 = Symbol();
+// const sym2 = Symbol('sym2');
 
-// MetaCharacters Symbols
-re = /^h/i;       // Must start with
-re = /d$/i;       // Must ends with
-re = /^hello$/i;  // Must begin and end with 
-re = /h.llo/i;    // Matches any ONE character
-re = /h*llo/i;    // Matches any character 0 or more times 
-re = /gre?a?y/i;  // Optional character
-re = /gre?a?y\?/i; // Escape character
+// console.log(typeof sym2);
 
+// console.log(Symbol('123') === Symbol('123')); // Cant be the same symbol
+// console.log(`Hello ${sym1.toString()}`);
 
-// Brackets [] - Character Sets
-re  = /gr[ae]y/i;     // Must be an a or e 
-re  = /[GF]ray/i;     // Must be a G or F
-re  = /[^GF]ray/i;    // Match anyting except a G or F
-re  = /[A-Z]ray/;     // Match any uppercase letter
-re  = /[a-z]ray/;     // Match any lowercase letter
-re  = /[A-Za-z]ray/;  // Match any letter
-re = /[0-9]ray/;      // Match any digit
+// Unique Object Keys
+const KEY1 = Symbol();
+const KEY2 = Symbol('sym2');
 
-// Braces {} - Quantifiers
-re = /Hel{2}o/i;      // Must occur exactly {m} amount of times
-re = /Hel{2,4}o/i;      // Must occur exactly {m} amount of times
-re = /Hel{2,}o/i;      // Must occur at least {m}  times
+const myObj = {};
 
-// Paretheses () - Grouping
-re = /^([0-9]x){3}$/
+myObj[KEY1] = 'Prop1';
+myObj[KEY2] = 'Prop2';
+myObj.KEY3 =  'Prop3';
+myObj.KEY4 =  'Prop4';
 
-// Shorthand Character Classes
-re = /\w/;   // Word character - alphanumeric or _
-re = /\w+/;  // + = one or more
-re = /\w/;   // Non-Word character 
-re = /\d/;   // Match any digit
-re = /\d+/;  // Match any digit 0 or more times
-re = /\D/;   // Match any Non-digit
-re = /\s/;   // Match whitespace char
-re = /\S/;   // Match Non-whitespace char
-re = /Hell\b/i; // Word boundary
+ // console.log(myObj[KEY1]);
+// console.log(myObj[KEY2]);
 
-// Assertions
-re = /x(?=y)/;  // Match x only if followed by y
-re = /x(?=y)/;  // Match x only if Not followed by y
+// Symbols are not enumerablei n for...in
+// for(let i in myObj) {
+  // console.log(`${i}: ${myObj[i]}`); 
+// }
 
-// String to match
-const str = '3x3x3x';
-
-// Log Results
-const result = re.exec(str);
-console.log(result);
-
-function reTest(re, str) {
-  if(re.test(str)) {
-    console.log(`${str} matches ${re.source}`);
-  } else {
-    console.log(`${str} does NOT match ${re.source}`);
-  }
-}
-
-reTest(re, str); 
+// Symbols are ignored by JSON.stringfiy
+console.log(JSON.stringify({key: 'prop'}));
+console.log(JSON.stringify({[Symbol('sym1')]: 'prop'})); // Empty object 
