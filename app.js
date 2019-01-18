@@ -1,26 +1,53 @@
-// Destructuring Assignment
+// MAPS = key-value pairs - can use ANY type as a key or value
 
-let a, b;
-[a, b] = [100, 200];
-// Rest pattern
-[a, b, ...rest] = [100, 200, 300, 400, 500]; // ... spread operator
+const map1 = new Map();
 
-({ a, b } = { a: 100, b: 200, c: 300, d: 400, e: 500 });
-({ a, b, ...rest} = { a: 100, b: 200, c: 300, d: 400, e: 500 });
+// Set Keys
+const key1 = 'some string', 
+      key2 = {},
+      key3 = function() {};
 
-// Array Destructuring
+// Set map values by key 
+map1.set(key1, 'Value of key1');
+map1.set(key2, 'Value of key2');
+map1.set(key3, 'Value of key3');
 
-//const people = ['John', 'Beth', 'Mike'];
+// Get values by key 
+//console.log(map1.get(key1),map1.get(key2),map1.get(key3));
 
-//const [person1, person2, person3] = people;
+// Count values
+//console.log(map1.size);
 
-// console.log(person1, person2, person3);
+// ITERATING MAPS
 
-// Parse array return from function
-function getPeople() {  
-  return ['John', 'Beth', 'Mike'];
-}
+// Loop using for...of to get keys and value
+// for(let [key, value] of map1) {
+  // console.log(`${key} = ${value}`);
+// }
 
-let person1, person2, person3;
-[person1, person2, person3] = getPeople();
-console.log(person1, person2, person3);
+// Iterate keys only
+// for(let key of map1.keys()) {
+// console.log(key);
+// }
+
+// Iterate values only  
+//for(let value of map1.values()) {
+  //console.log(value);
+//}
+
+// Loop with forEach
+//map1.forEach(function(value,key){
+  //console.log(`${key} = ${value}`);
+//});
+
+// CONVERT TO ARRAYS
+
+ // Create an array of the key value pairs 
+const keyValArr = Array.from(map1.values());
+console.log(keyValArr);
+
+// Create an array of the keys 
+const keyArr = Array.from(map1.values());
+console.log(keyArr);
+
+
