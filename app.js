@@ -1,31 +1,26 @@
-// Create a symbol
-// const sym1 = Symbol();
-// const sym2 = Symbol('sym2');
+// Destructuring Assignment
 
-// console.log(typeof sym2);
+let a, b;
+[a, b] = [100, 200];
+// Rest pattern
+[a, b, ...rest] = [100, 200, 300, 400, 500]; // ... spread operator
 
-// console.log(Symbol('123') === Symbol('123')); // Cant be the same symbol
-// console.log(`Hello ${sym1.toString()}`);
+({ a, b } = { a: 100, b: 200, c: 300, d: 400, e: 500 });
+({ a, b, ...rest} = { a: 100, b: 200, c: 300, d: 400, e: 500 });
 
-// Unique Object Keys
-const KEY1 = Symbol();
-const KEY2 = Symbol('sym2');
+// Array Destructuring
 
-const myObj = {};
+//const people = ['John', 'Beth', 'Mike'];
 
-myObj[KEY1] = 'Prop1';
-myObj[KEY2] = 'Prop2';
-myObj.KEY3 =  'Prop3';
-myObj.KEY4 =  'Prop4';
+//const [person1, person2, person3] = people;
 
- // console.log(myObj[KEY1]);
-// console.log(myObj[KEY2]);
+// console.log(person1, person2, person3);
 
-// Symbols are not enumerablei n for...in
-// for(let i in myObj) {
-  // console.log(`${i}: ${myObj[i]}`); 
-// }
+// Parse array return from function
+function getPeople() {  
+  return ['John', 'Beth', 'Mike'];
+}
 
-// Symbols are ignored by JSON.stringfiy
-console.log(JSON.stringify({key: 'prop'}));
-console.log(JSON.stringify({[Symbol('sym1')]: 'prop'})); // Empty object 
+let person1, person2, person3;
+[person1, person2, person3] = getPeople();
+console.log(person1, person2, person3);
