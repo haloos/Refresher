@@ -1,49 +1,24 @@
-// Basic structure
+const Singleton = (function() {
+  let instance;
 
-// (function() {
-// Declare private vars and functions
-
-// return {
-// Declare public var and functions
-// }
-// })();
-
-// Standard Module Pattern 
-/*const UICtrl = (function() {
-  let text = 'Hello World';
-
-  const changeText = function() {
-    const element = document.querySelector('h1');
-    element.textContent = text;
+  function createInstance() {
+    const object = new Object({name: 'Jason'});
+    return object;
   }
 
   return {
-    callChangeText: function() {
-      changeText();
-      console.log(text);
+    getInstance: function() {
+      if(!instance){
+        instance = createInstance();
+      }
+      return instance;
     }
-  }
-})();*/
-
-// Revealing Module Pattern 
-const ItemCtrl = (function() {
-  let data = [];
-
-  function add(item) {
-    data.push(item);
-    console.log('Item Added ...');
-  }
-
-  function get(id) {
-    return data.find(item => {
-      return item.id === id;
-    });
-  }
-
-  return {
-    add: add,
-    get: get,
   }
 })();
 
-ItemCtrl.add({id:1, name: 'John'});
+const instanceA = Singleton.getInstance();
+const instanceb = Singleton.getInstance();
+
+//console.log(instanceA);
+
+console.log(instanceA === instanceb);
