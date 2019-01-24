@@ -1,63 +1,52 @@
-function EventObserver() {
-  this.observers = [];
+const User = function(name) {
+  this.name = name;
+  this.chatroom = null;
 }
 
-EventObserver.prototype = {
-  subscribe: function(fn) {
-    this.observers.push(fn);
-    console.log(`You are now subscribed to ${fn.name}`);
-  }, 
-  unsubscribe: function(fn) {
-    this.observers = this.observers.filter(function(item){
-      if(item !== fn) {
-        return item;
-      }
-    });
-    console.log(`You are now unsubscribed from ${fn.name}`);
+User.prototype = {
+  send: function(message, to) {
+    this.chatroom.send(message, this, to);  // this = user
   },
-  fire: function() {
-    this.observers.forEach(function(item) {
-      item.call();
-    });
+  recieve: function(message, from) {
+    console.log(`${from.name} to ${this.name}: ${message}`);
   }
 }
 
-const click = new EventObserver();
+const Chatroom = function() {
+  let users = {}; // list of users
 
-// Event Listeners
-document.querySelector('.sub-ms').addEventListener('click',
-function() {
-click.subscribe(getCurMilliseconds);
-});
-
-
-document.querySelector('.unsub-ms').addEventListener('click',
-function() {
-click.unsubscribe(getCurMilliseconds);
-});
-
-document.querySelector('.sub-s').addEventListener('click',
-function() {
-click.subscribe(getCurSeconds);
-});
-
-
-document.querySelector('.unsub-s').addEventListener('click',
-function() {
-click.unsubscribe(getCurSeconds);
-});
-
-
-document.querySelector('.fire').addEventListener('click',
-function() {
-click.fire();
-});
-
-// Click Handler
-const getCurMilliseconds = function() {
-  console.log(`Current Milliseconds: ${new Date().getMilliseconds()}`);
+  return {
+    register: function(user) {
+      users[user.name] = user;
+      user.chatroom = this;
+    },
+    send: function(message, from, to) {
+      if(to) {
+        // Single user message
+        to.recieve(message, from);
+      } else {
+        // Mass message 
+        for(key in users) {
+          if(users[key] !== from) {
+            users[key].recieve(message, from);
+          }
+          
+        }
+      }
+    }
+  }
 }
 
-const getCurSeconds = function() {
-  console.log(`Current Seconds: ${new Date().getMilliseconds()}`);
-}
+const jason = new User('Jason');
+const jeff = new User('Jeff');
+const jessica = new User('Jessica');
+
+const chatroom = new Chatroom();
+
+chatroom.register(jason);
+chatroom.register(jeff);
+chatroom.register(jessica);
+
+jason.send('Hello Jeff', jeff);
+jessica.send('Hi Jason, how are you today?', jason);
+jeff.send('Hello Everyone!!');
